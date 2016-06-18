@@ -1,0 +1,104 @@
+CREATE TABLE institutes(
+	inst_id			SERIAL		PRIMARY KEY,
+	inst_name		TEXT,
+	inst_city		TEXT,
+	schema_name		VARCHAR(50)
+);
+
+CREATE TABLE useraccounts(
+	
+	user_id			SERIAL PRIMARY KEY,
+	inst_id     	INTEGER,
+	username		VARCHAR(50),
+	password		VARCHAR(50),
+	user_name		TEXT,
+	FOREIGN KEY(inst_id)	REFERENCES		institutes(inst_id)
+);
+
+CREATE TYPE authlevel AS ENUM ('manager', 'officer', 'lecturer');
+
+/////////////// Tables to be inside a institute/////////////////////////
+
+//////////schema eg:inst_01////////////////
+
+CREATE SCHEMA inst_01;
+
+CREATE TABLE inst_01.inst_useraccounts(
+	user_id			INTEGER		PRIMARY KEY,
+	auth_level		authlevel,
+	FOREIGN KEY(user_id)	REFERENCES		useraccounts(user_id)
+);
+
+//////////schema eg:inst_02////////////////
+
+CREATE SCHEMA inst_02;
+
+
+CREATE TABLE inst_02.inst_useraccounts(
+	user_id			INTEGER		PRIMARY KEY,
+	auth_level		authlevel,
+	FOREIGN KEY(user_id)	REFERENCES		useraccounts(user_id)
+);
+
+//////////schema eg:inst_03////////////////
+
+CREATE SCHEMA inst_03;
+
+CREATE TABLE inst_03.inst_useraccounts(
+	user_id			INTEGER		PRIMARY KEY,
+	auth_level		authlevel,
+	FOREIGN KEY(user_id)	REFERENCES		useraccounts(user_id)
+);
+
+//////////schema eg:inst_04////////////////
+
+CREATE SCHEMA inst_04;
+
+
+CREATE TABLE inst_04.inst_useraccounts(
+	user_id			INTEGER		PRIMARY KEY,
+	auth_level		authlevel,
+	FOREIGN KEY(user_id)	REFERENCES		useraccounts(user_id)
+);
+
+////////////////////////////////////////////////////////////////////////////////////
+
+INSERT INTO institutes(inst_name, inst_city, schema_name) VALUES ('Dekma Institute', 'Matara', 'inst_01');
+INSERT INTO institutes(inst_name, inst_city, schema_name) VALUES ('Dakuna Adyapana Kendraya', 'Matara', 'inst_02');
+INSERT INTO institutes(inst_name, inst_city, schema_name) VALUES ('Sipyana Higher Education College', 'Nugegoda', 'inst_03');
+INSERT INTO institutes(inst_name, inst_city, schema_name) VALUES ('Alexandra College', 'Colombo-06', 'inst_04');
+
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (1, 'officer@1', '123', 'officer@1');
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (1, 'manager@1', 'pword_man_1', 'manager@1');
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (1, 'lecturer@1', 'pword_lec_1', 'lecturer@1');
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (1, 'officer2@1', 'pword_off2_1', 'officer2@1');
+
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (2, 'officer@2', '123', 'officer@2');
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (2, 'manager@2', 'pword_man_2', 'manager@2');
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (2, 'lecturer@2', 'pword_lec_2', 'lecturer@2');
+
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (3, 'officer@3', 'pword_off_3', 'officer@3');
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (3, 'manager@3', 'pword_man_3', 'manager@3');
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (3, 'lecturer@3', 'pword_lec_3', 'lecturer@3');
+
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (4, 'officer@4', '1234', 'officer@4');
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (4, 'manager@4', 'pword_man_4', 'manager@4');
+INSERT INTO useraccounts(inst_id, username, password, user_name) VALUES (4, 'lecturer@4', 'pword_lec_4', 'lecturer@4');
+
+INSERT INTO inst_01.inst_useraccounts(user_id, auth_level) VALUES (1, 'officer');
+INSERT INTO inst_01.inst_useraccounts(user_id, auth_level) VALUES (2, 'manager');
+INSERT INTO inst_01.inst_useraccounts(user_id, auth_level) VALUES (3, 'lecturer');
+INSERT INTO inst_01.inst_useraccounts(user_id, auth_level) VALUES (4, 'officer');
+
+INSERT INTO inst_02.inst_useraccounts(user_id, auth_level) VALUES (5, 'officer');
+INSERT INTO inst_02.inst_useraccounts(user_id, auth_level) VALUES (6, 'manager');
+INSERT INTO inst_02.inst_useraccounts(user_id, auth_level) VALUES (7, 'lecturer');
+
+INSERT INTO inst_03.inst_useraccounts(user_id, auth_level) VALUES (8, 'officer');
+INSERT INTO inst_03.inst_useraccounts(user_id, auth_level) VALUES (9, 'manager');
+INSERT INTO inst_03.inst_useraccounts(user_id, auth_level) VALUES (10, 'lecturer');
+
+INSERT INTO inst_04.inst_useraccounts(user_id, auth_level) VALUES (11, 'officer');
+INSERT INTO inst_04.inst_useraccounts(user_id, auth_level) VALUES (12, 'manager');
+INSERT INTO inst_04.inst_useraccounts(user_id, auth_level) VALUES (13, 'lecturer');
+
